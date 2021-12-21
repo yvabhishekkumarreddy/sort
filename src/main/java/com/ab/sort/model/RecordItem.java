@@ -17,8 +17,8 @@ public class RecordItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
-    private int itemId;
+    private long id;
+    private String itemName;
     private int unitPrice;
     private int unitDiscount;
     private int NumberOfUnits;
