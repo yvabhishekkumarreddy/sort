@@ -1,5 +1,6 @@
 package com.ab.sort.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class RecordItem {
     private int unitDiscount;
     private int NumberOfUnits;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "record_id",nullable = false)
     private Record record;

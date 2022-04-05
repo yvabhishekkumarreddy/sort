@@ -7,10 +7,12 @@ import com.ab.sort.mapper.RecordMapper;
 import com.ab.sort.model.Record;
 import com.ab.sort.model.RecordItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -35,14 +37,21 @@ public class RecordController {
             discount += r.getUnitDiscount() * r.getNumberOfUnits();
             recordItemRepo.save(r);
         }
-        System.out.println("discount "+ discount);
         record.setTotalAmount(amount);
         discount += record.getCouponDiscount();
-        System.out.println(record.getCouponDiscount());
-        System.out.println("Total discount "+ discount);
         record.setTotalDiscount(discount);
         record.setBillingAmount(amount-discount);
         recordRepo.save(record);
         return record.toString();
+    }
+
+    @GetMapping("/getSales")
+    public List<Record> getSales(){
+        return recordRepo.findAllByType("sale");
+    }
+
+    @GetMapping("/getExpenses")
+    public List<Record> getExpenses(){
+        return recordRepo.findAllByType("expense");
     }
 }

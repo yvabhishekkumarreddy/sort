@@ -1,5 +1,6 @@
 package com.ab.sort.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -27,7 +28,8 @@ public class Record {
     private float totalDiscount;
     private float billingAmount;
     private String type;
-    @OneToMany(mappedBy = "record")
+    @JsonManagedReference
     @ToString.Exclude
+    @OneToMany(mappedBy = "record")
     private Set<RecordItem> recordItems;
 }
